@@ -2,6 +2,7 @@
  * 메인화면에서 좌측 drawer
  */
 import React from "react";
+import DashboardIcon from "@material-ui/icons/Dashboard";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import Divider from "@material-ui/core/Divider";
 import List from "@material-ui/core/List";
@@ -10,6 +11,8 @@ import clsx from "clsx";
 import IconButton from "@material-ui/core/IconButton";
 import Drawer from "@material-ui/core/Drawer";
 import { useHistory } from "react-router";
+import { ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
+import { REQUEST } from "../../constants/Link";
 
 export const drawerWidth = 240; // drawer 너비.
 
@@ -64,7 +67,14 @@ export default function CustomDrawer({ open, handleDrawerClose }) {
                </IconButton>
             </div>
             <Divider />
-            <List></List>
+            <List>
+               <ListItem button onClick={() => history.push(REQUEST)}>
+                  <ListItemIcon>
+                     <DashboardIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="요청 리스트" />
+               </ListItem>
+            </List>
          </Drawer>
       </>
    );

@@ -7,8 +7,8 @@ import Main from "./routes/Main";
 function App() {
    return (
       <Router>
-         <Route exact path="/main" component={Login} />
-         <Route path="/" component={Main} />
+         <Route exact path="/" component={Login} />
+         <Route path="/main" component={Main} />
       </Router>
    );
 }

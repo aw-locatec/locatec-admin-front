@@ -32,7 +32,7 @@ function Main({ isLogined, history }) {
    useEffect(() => {
       // 로그인 되어있지 않으면 로그인 화면으로 이동시키기
       if (!isLogined) {
-         history.push("/");
+         //  history.push("/");
       }
    }, [isLogined, history]);
 

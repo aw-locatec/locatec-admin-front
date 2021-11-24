@@ -13,6 +13,7 @@ import { useHistory } from "react-router";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { logined } from "../../stores/loginState";
+import { REQUEST } from "../../constants/Link";
 
 // styled-component로 ErrorMessage 스타일 적용
 const ErrorMessege = styled.div`
@@ -68,7 +69,11 @@ function Auth({ onLogined }) {
    };
 
    // 로그인
-   const login = () => {};
+   const login = () => {
+      setEmail("");
+      setPw("");
+      history.push(REQUEST);
+   };
 
    // 로그인 버튼 클릭시 호출
    const onClick = (e) => {
