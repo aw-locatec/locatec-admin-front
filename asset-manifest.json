@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.js": "/aw-locatec/locatec-admin-front/static/js/main.1b5156fd.chunk.js",
-    "main.js.map": "/aw-locatec/locatec-admin-front/static/js/main.1b5156fd.chunk.js.map",
-    "runtime-main.js": "/aw-locatec/locatec-admin-front/static/js/runtime-main.65a7a28e.js",
-    "runtime-main.js.map": "/aw-locatec/locatec-admin-front/static/js/runtime-main.65a7a28e.js.map",
-    "static/js/2.d3d0afbc.chunk.js": "/aw-locatec/locatec-admin-front/static/js/2.d3d0afbc.chunk.js",
-    "static/js/2.d3d0afbc.chunk.js.map": "/aw-locatec/locatec-admin-front/static/js/2.d3d0afbc.chunk.js.map",
-    "index.html": "/aw-locatec/locatec-admin-front/index.html",
-    "static/js/2.d3d0afbc.chunk.js.LICENSE.txt": "/aw-locatec/locatec-admin-front/static/js/2.d3d0afbc.chunk.js.LICENSE.txt",
-    "static/media/mainImage.2e09f39a.png": "/aw-locatec/locatec-admin-front/static/media/mainImage.2e09f39a.png"
+    "main.js": "/locatec-admin-front/static/js/main.1b5156fd.chunk.js",
+    "main.js.map": "/locatec-admin-front/static/js/main.1b5156fd.chunk.js.map",
+    "runtime-main.js": "/locatec-admin-front/static/js/runtime-main.10fdc990.js",
+    "runtime-main.js.map": "/locatec-admin-front/static/js/runtime-main.10fdc990.js.map",
+    "static/js/2.2f85a103.chunk.js": "/locatec-admin-front/static/js/2.2f85a103.chunk.js",
+    "static/js/2.2f85a103.chunk.js.map": "/locatec-admin-front/static/js/2.2f85a103.chunk.js.map",
+    "index.html": "/locatec-admin-front/index.html",
+    "static/js/2.2f85a103.chunk.js.LICENSE.txt": "/locatec-admin-front/static/js/2.2f85a103.chunk.js.LICENSE.txt",
+    "static/media/mainImage.2e09f39a.png": "/locatec-admin-front/static/media/mainImage.2e09f39a.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.65a7a28e.js",
-    "static/js/2.d3d0afbc.chunk.js",
+    "static/js/runtime-main.10fdc990.js",
+    "static/js/2.2f85a103.chunk.js",
     "static/js/main.1b5156fd.chunk.js"
   ]
 }
