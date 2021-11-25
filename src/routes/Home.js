@@ -8,7 +8,14 @@ import clsx from "clsx";
 import { Route } from "react-router";
 import PageList from "../components/request/PageList";
 import PageItem from "../components/request/PageItem";
-import { REQUEST, REQUEST_ITEM } from "../constants/Link";
+import WholeList from "../components/wholeList/WholeList";
+import WholeListItem from "../components/wholeList/WholeListItem,";
+import {
+   REQUEST,
+   REQUEST_ITEM,
+   WHOLELIST,
+   WHOLELIST_ITEM,
+} from "../constants/Link";
 import { SMOKE, TRASHCAN } from "../constants/types";
 
 // 스타일들
@@ -111,6 +118,8 @@ function Home() {
    const [loading, setLoading] = useState(false); // 로딩 상태 관리
    const [requestItem, setRequestItem] = useState(null); // 요청 리스트 중 하나를 선택할지 여기에 그 데이터가 들어감
    const [requestList, setRequestList] = useState([]); // 요청리스트
+   const [wholeListItem, setWholeListItem] = useState(null); // 전체 리스트 중 하나를 선택할지 여기에 그 데이터가 들어감
+   const [wholeList, setWholeList] = useState([]); // 전체 리스트
    const [refresh, setRefresh] = useState(0);
 
    // 가운데 paper 사이즈 적용
@@ -122,6 +131,7 @@ function Home() {
          setLoading(true);
          // 요청리스트 받아오기
          setRequestList(tempRequestList);
+         setWholeList(tempRequestList);
          setLoading(false);
       };
       getList();
@@ -143,6 +153,22 @@ function Home() {
                   </Route>
                   <Route path={REQUEST_ITEM}>
                      <PageItem item={requestItem} />
+                  </Route>
+                  <Route exact path={WHOLELIST}>
+                     <WholeList
+                        setLoading={setLoading}
+                        list={wholeList}
+                        setItem={setWholeListItem}
+                        setRefresh={setRefresh}
+                     />
+                  </Route>
+                  <Route path={WHOLELIST_ITEM}>
+                     <WholeListItem
+                        item={wholeListItem}
+                        setItem={setWholeListItem}
+                        setLoading={setLoading}
+                        setRefresh={setRefresh}
+                     />
                   </Route>
                </Paper>
             </Container>

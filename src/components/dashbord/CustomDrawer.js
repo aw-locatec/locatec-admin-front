@@ -12,7 +12,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Drawer from "@material-ui/core/Drawer";
 import { useHistory } from "react-router";
 import { ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
-import { REQUEST } from "../../constants/Link";
+import { REQUEST, WHOLELIST } from "../../constants/Link";
 
 export const drawerWidth = 240; // drawer 너비.
 
@@ -73,6 +73,12 @@ export default function CustomDrawer({ open, handleDrawerClose }) {
                      <DashboardIcon />
                   </ListItemIcon>
                   <ListItemText primary="요청 리스트" />
+               </ListItem>
+               <ListItem button onClick={() => history.push(WHOLELIST)}>
+                  <ListItemIcon>
+                     <DashboardIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="전체 리스트" />
                </ListItem>
             </List>
          </Drawer>
