@@ -6,7 +6,7 @@ import Main from "./routes/Main";
 // 가장 초기화면은 로그인화면. 인증이 됐을 경우 main으로 이동한다.
 function App() {
    return (
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
          <Route exact path="/" component={Login} />
          <Route path="/main" component={Main} />
       </Router>
