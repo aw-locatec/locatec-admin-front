@@ -9,6 +9,10 @@ import { WHOLELIST } from "../../constants/Link";
 import MapWrap from "../elements/MapWrap";
 import { locationTypeArray, SMOKE } from "../../constants/types";
 import mapLocTypeToStr from "../../utils/mapLocTypeToStr";
+import {
+   createWholeListItemApi,
+   updateWholeListItemApi,
+} from "../../api/wholeList";
 // 스타일
 const useStyles = makeStyles(() => ({
    topButton: {
@@ -84,9 +88,9 @@ function WholeListItem({ item, setLoading, setRefresh }) {
             }
             //수정일땐 수정 api, 생성일땐 생성 api 호출
             if (isEdit) {
-               // 수정 요청
+               await updateWholeListItemApi(obj);
             } else {
-               // 생성 요청
+               await createWholeListItemApi(obj);
             }
             setRefresh((prev) => prev + 1);
             history.push(WHOLELIST);

@@ -16,7 +16,9 @@ import {
    WHOLELIST,
    WHOLELIST_ITEM,
 } from "../constants/Link";
-import { SMOKE, TRASHCAN } from "../constants/types";
+import { getRequestListApi } from "../api/requestList";
+import { NO_DATA } from "../api/serverError";
+import { getWholeListApi } from "../api/wholeList";
 
 // 스타일들
 const useStyles = makeStyles((theme) => ({
@@ -47,72 +49,6 @@ const useStyles = makeStyles((theme) => ({
    appBarSpacer: theme.mixins.toolbar,
 }));
 
-const tempRequestList = [
-   {
-      id: 1,
-      type: TRASHCAN,
-      coords: {
-         latitude: 37.630682295065505,
-         longitude: 127.0804025572257,
-      },
-      image: "https://www.costco.co.kr/medias/sys_master/images/hb9/hb8/15318005022750.jpg",
-   },
-   {
-      id: 2,
-      type: SMOKE,
-      coords: {
-         latitude: 37.629635550859,
-         longitude: 127.08086267102873,
-      },
-      image: "https://newsimg.hankookilbo.com/cms/articlerelease/2015/10/18/201510182224437401_1.jpg",
-   },
-   {
-      id: 3,
-      type: SMOKE,
-      coords: {
-         latitude: 37.63133962861005,
-         longitude: 127.07673969062887,
-      },
-      image: "https://newsimg.hankookilbo.com/cms/articlerelease/2015/10/18/201510182224437401_1.jpg",
-   },
-   {
-      id: 4,
-      type: TRASHCAN,
-      coords: {
-         latitude: 37.63311154223848,
-         longitude: 127.07690659454285,
-      },
-      image: "https://www.costco.co.kr/medias/sys_master/images/hb9/hb8/15318005022750.jpg",
-   },
-   {
-      id: 5,
-      type: SMOKE,
-      coords: {
-         latitude: 37.633976049288925,
-         longitude: 127.08052886291345,
-      },
-      image: "https://newsimg.hankookilbo.com/cms/articlerelease/2015/10/18/201510182224437401_1.jpg",
-   },
-   {
-      id: 6,
-      type: TRASHCAN,
-      coords: {
-         latitude: 37.634836974008856,
-         longitude: 127.07739828481888,
-      },
-      image: "https://www.costco.co.kr/medias/sys_master/images/hb9/hb8/15318005022750.jpg",
-   },
-   {
-      id: 7,
-      type: SMOKE,
-      coords: {
-         latitude: 37.6349341635446,
-         longitude: 127.07542743118924,
-      },
-      image: "https://newsimg.hankookilbo.com/cms/articlerelease/2015/10/18/201510182224437401_1.jpg",
-   },
-];
-
 function Home() {
    const classes = useStyles();
    const [loading, setLoading] = useState(false); // 로딩 상태 관리
@@ -127,11 +63,36 @@ function Home() {
 
    useEffect(() => {
       // 리스트 받아오기
+      const preprocessing = (data) => {
+         const processed = data.map((item) => ({
+            id: item.id,
+            type: item.type,
+            coords: {
+               latitude: parseFloat(item.latitude),
+               longitude: parseFloat(item.longitude),
+            },
+            image: item.imageUrl,
+         }));
+         return processed;
+      };
+
+      // 리스트 받아오기
       const getList = async () => {
-         setLoading(true);
          // 요청리스트 받아오기
-         setRequestList(tempRequestList);
-         setWholeList(tempRequestList);
+         const res = await getRequestListApi();
+         if (res.response === NO_DATA) {
+            setRequestList([]);
+         } else {
+            setRequestList(preprocessing(res.response));
+         }
+
+         // 전체 리스트 받아오기
+         const res_whole = await getWholeListApi();
+         if (res_whole.response === NO_DATA) {
+            setWholeList([]);
+         } else {
+            setWholeList(preprocessing(res_whole.response));
+         }
          setLoading(false);
       };
       getList();

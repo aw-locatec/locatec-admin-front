@@ -14,6 +14,7 @@ import RemoveIcon from "@material-ui/icons/Remove";
 import { useHistory } from "react-router";
 import mapLocTypeToStr from "../../utils/mapLocTypeToStr";
 import { REQUEST_ITEM } from "../../constants/Link";
+import { approveRequestApi, declineRequestApi } from "../../api/requestList";
 
 function PageList({ list, setLoading, setItem, setRefresh }) {
    const history = useHistory(); // 브라우저 history 객체 가져오기
@@ -32,6 +33,7 @@ function PageList({ list, setLoading, setItem, setRefresh }) {
       // 한번 더 확인
       if (window.confirm("허가하시겠습니까?")) {
          try {
+            await approveRequestApi(item.id);
             setRefresh((prev) => prev + 1);
          } catch (e) {
             window.alert("요청에 실패했습니다!");
@@ -46,6 +48,7 @@ function PageList({ list, setLoading, setItem, setRefresh }) {
       // 한번 더 확인
       if (window.confirm("거부하시겠습니까?")) {
          try {
+            await declineRequestApi(item.id);
             setRefresh((prev) => prev + 1);
          } catch (e) {
             window.alert("요청에 실패했습니다!");
@@ -70,7 +73,7 @@ function PageList({ list, setLoading, setItem, setRefresh }) {
             ) : (
                list.map((item, idx) => {
                   return (
-                     <>
+                     <span key={`requestlist_${idx}`}>
                         <ListItem
                            id={idx}
                            key={idx}
@@ -98,7 +101,7 @@ function PageList({ list, setLoading, setItem, setRefresh }) {
                            </ListItemSecondaryAction>
                         </ListItem>
                         <Divider />
-                     </>
+                     </span>
                   );
                })
             )}
