@@ -72,6 +72,7 @@ function Auth({ onLogined }) {
    const login = () => {
       setEmail("");
       setPw("");
+      onLogined("asd");
       history.push(REQUEST);
    };
 
