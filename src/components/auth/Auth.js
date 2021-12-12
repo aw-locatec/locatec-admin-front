@@ -14,6 +14,7 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import { logined } from "../../stores/loginState";
 import { REQUEST } from "../../constants/Link";
+import { login as loginApi } from "../../api/auth";
 
 // styled-component로 ErrorMessage 스타일 적용
 const ErrorMessege = styled.div`
@@ -49,31 +50,33 @@ function Auth({ onLogined }) {
    const [errMsg, setErrMsg] = useState(""); // 에러메세지 상태
    const classes = useStyles(); // 위에서 선언한 스타일 가져오리
 
-   // 인증 에러 핸들링
-   const errorHandle = (err) => {
-      if (err.code === "auth/user-not-found") {
-         setErrMsg("가입되지 않은 이메일입니다.");
-      } else if (err.code === "auth/invalid-email") {
-         setErrMsg("이메일 형식을 지켜주세요.");
-      } else if (err.code === "auth/wrong-password") {
-         setErrMsg("잘못된 비밀번호 입니다.");
-      } else if (err.code === "auth/weak-password") {
-         setErrMsg("비밀번호는 최소 6자 이상이어야 합니다.");
-      } else if (err.code === "auth/email-already-in-use") {
-         setErrMsg("이미 사용중인 이메일입니다.");
-      } else if (err.code === "auth/user-disabled") {
-         setErrMsg("차단된 회원입니다.");
-      } else {
-         setErrMsg(err.message);
-      }
-   };
-
    // 로그인
-   const login = () => {
-      setEmail("");
-      setPw("");
-      onLogined("asd");
-      history.push(REQUEST);
+   const login = async () => {
+      const email_test = email.trim();
+      const pw_test = pw.trim();
+
+      if (email_test === "" || pw_test === "") {
+         setErrMsg("이메일 또는 비밀번호를 입력해주세요.");
+         return;
+      } else if (
+         /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i.test(
+            email_test
+         ) === false
+      ) {
+         setErrMsg("이메일 형식을 지켜주세요.");
+         return;
+      }
+
+      try {
+         await loginApi({ id: email_test, password: pw_test });
+         setEmail("");
+         setPw("");
+         onLogined("logined");
+         history.push(REQUEST);
+      } catch (err) {
+         setErrMsg("잘못된 이메일 혹은 비밀번호입니다.");
+         console.log(err);
+      }
    };
 
    // 로그인 버튼 클릭시 호출
